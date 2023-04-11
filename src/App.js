@@ -91,17 +91,23 @@ function App() {
           <input type="text"//create a new state and substitute that character with a value property
             
             value={generatedPassword}  //we need to modify the generated password method in order add custom characters that must be omitted when the final password is generated
-             //place holder until we can edit this input bar
+             //readOnly //place holder until we can edit this input bar
             className="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
             id="password"
           />
           </form>
 
-          <label
+
+
+
+
+
+
+          <label //we now need to replace generated password with a new method that allows us to manually write down the characters that we want ommited when we click the generate
             htmlFor="password"
             className="block text-sm font-medium text-gray-700"
-          >
-            Generated Password
+          > 
+            Generated Password 
           </label>
           <input
             type="text"
