@@ -11,6 +11,12 @@ function App() {
     setPasswordLevel(event.target.value);
   };
 
+
+  const omitChars = (event) => {
+    
+  }
+
+
   const generatePassword = () => {
     let password = "";
 
