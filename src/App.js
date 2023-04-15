@@ -6,14 +6,19 @@ function App() {
   const [passwordLevel, setPasswordLevel] = useState(1);
   const [generatedPassword, setGeneratedPassword] = useState("");
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isOmitted, setIsOmitted] = useState("");
 
   const handleSliderChange = (event) => {
     setPasswordLevel(event.target.value);
   };
+  const handleOmittedChange = (event) => {
+    setIsOmitted(event.target.value);
+  };
 
   const generatePassword = () => {
     let password = "";
-
+    let omitted = isOmitted;
+    let parsed = "";
     switch (passwordLevel) {
       case "1":
         password = level1();
@@ -33,8 +38,14 @@ function App() {
       default:
         break;
     }
-
-    setGeneratedPassword(password);
+      for(let i=0;i<password.length;i++){
+        for(let j=0;j<omitted.length;j++){
+          if(password[i]===omitted[j]){
+             parsed = password.replace(omitted[j],"")
+          } 
+        }
+      }
+    setGeneratedPassword(parsed);
   };
 
   const checkStrength = () => {
@@ -76,7 +87,21 @@ function App() {
             Check Strength
           </button>
         </div>
+        <form>
         <div>
+          <label
+            htmlFor="password"
+            className="block text-sm font-medium text-gray-700"
+          >
+            Omitted Characters
+          </label>
+          <input
+            type="text"
+            value={isOmitted}
+            onChange={handleOmittedChange}
+            className="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+            id="omitted"
+          />
           <label
             htmlFor="password"
             className="block text-sm font-medium text-gray-700"
@@ -86,11 +111,11 @@ function App() {
           <input
             type="text"
             value={generatedPassword}
-            readOnly
             className="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
             id="password"
           />
         </div>
+        </form>
       </div>
       <div
         className="p-6 rounded-md shadow-md max-w-md"
