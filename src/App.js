@@ -18,7 +18,6 @@ function App() {
   const generatePassword = () => {
     let password = "";
     let omitted = isOmitted;
-    let parsed = "";
     switch (passwordLevel) {
       case "1":
         password = level1();
@@ -40,12 +39,12 @@ function App() {
     }
       for(let i=0;i<password.length;i++){
         for(let j=0;j<omitted.length;j++){
-          if(password[i]===omitted[j]){
-             parsed = password.replace(omitted[j],"")
+          if(password[i]==omitted[j]){
+             password = password.replace(omitted[j],"")
           } 
         }
       }
-    setGeneratedPassword(parsed);
+    setGeneratedPassword(password);
   };
 
   const checkStrength = () => {
